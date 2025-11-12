@@ -1,0 +1,51 @@
+table {
+    width: 40%;
+    margin-left: 8rem;
+    margin-top: 0.5rem;
+    border-collapse: collapse;
+    outline: 1px solid black; 
+  }
+#btn1{
+  margin-left: 8rem;
+
+}
+
+#btn2{
+  margin-left: 1rem;
+}
+  .box{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+   
+  }
+
+  img{
+    margin-top: 0.3rem;
+    width: 15rem;
+    height: 12rem;
+  }
+
+  table th {
+  font-weight: 600;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.profile-photo {
+  transition: transform 0.3s ease;
+}
+
+.profile-photo:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,135 @@
+<div class="container-fluid py-4">
+
+  <!-- 🔍 Header + Search + Job ID for scoring -->
+  <div class="d-flex justify-content-between align-items-center mb-3 px-3">
+    <h4 class="fw-bold text-dark m-0">
+      <i class="bi bi-people-fill me-2"></i>Employee Master
+    </h4>
+
+    <div class="d-flex align-items-center gap-2">
+      <form (ngSubmit)="goToEmployee()" class="d-flex align-items-center">
+        <input [(ngModel)]="EnteredID" type="text" id="id" name="id" placeholder="Search by ID"
+          class="form-control form-control-sm rounded-pill me-2 px-3 search-box shadow-sm" />
+        <button class="btn btn-sm btn-dark rounded-pill px-3">
+          <i class="bi bi-search"></i> Search
+        </button>
+      </form>
+
+      <!-- Job ID for scoring / re-score -->
+      <input type="number" class="form-control form-control-sm rounded-pill me-2 px-3"
+             placeholder="Job ID for scoring" [(ngModel)]="jobIdForScoring" style="width:180px;" />
+
+      <button class="btn btn-sm btn-outline-primary" (click)="getEmployees()">
+        <i class="bi bi-arrow-clockwise"></i> Refresh
+      </button>
+    </div>
+  </div>
+
+  <!-- 🧑‍💼 Employee Table -->
+  <div class="card border-0 shadow-sm rounded-4">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle mb-0 erp-table">
+
+        <thead class="table-dark text-center">
+          <tr>
+            <th style="width: 4%">ID</th>
+            <th style="width: 12%">First Name</th>
+            <th style="width: 12%">Last Name</th>
+            <th style="width: 18%">Email</th>
+            <th style="width: 10%">Department</th>
+            <th style="width: 10%">Designation</th>
+            <th style="width: 12%">Score</th>
+            <th style="width: 8%">Status</th>
+            <th style="width: 13%">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody class="text-center">
+          <tr *ngFor="let employee of employees">
+            <td class="fw-bold text-primary">#{{ employee.id }}</td>
+            <td>{{ employee.fname }}</td>
+            <td>{{ employee.lname }}</td>
+            <td>
+              <a href="mailto:{{ employee.email }}" class="text-decoration-none text-dark fw-medium">
+                {{ employee.email }}
+              </a>
+            </td>
+            <td>
+              <span class="badge bg-gradient-info text-dark px-3 py-2">
+                {{ employee.department }}
+              </span>
+            </td>
+            <td>{{ employee.designation }}</td>
+
+            <!-- Score column -->
+            <td class="text-start">
+              <div class="small mb-1"> <strong>{{ employee.resumeScore ?? 0 | number:'1.0-0' }}</strong> / 100 </div>
+              <div class="progress" style="height:8px;">
+                <div class="progress-bar" role="progressbar" [style.width.%]="employee.resumeScore ?? 0"></div>
+              </div>
+            </td>
+
+            <!-- Status -->
+            <td>
+              <span class="badge"
+                    [ngClass]="{
+                      'bg-success': employee.resumeStatus === 'SHORTLISTED',
+                      'bg-warning': employee.resumeStatus === 'REVIEW',
+                      'bg-secondary': !employee.resumeStatus
+                    }">
+                {{ employee.resumeStatus || 'UPLOADED' }}
+              </span>
+            </td>
+
+            <!-- Actions: edit/delete/view + upload + re-score -->
+            <td>
+              <div class="d-flex flex-column align-items-center gap-2">
+                <div class="d-flex justify-content-center gap-2 w-100">
+                  <button (click)="updateEmployee(employee.id)" class="btn btn-sm btn-outline-secondary"
+                    title="Edit Employee">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <button (click)="deleteEmployee(employee.id)" class="btn btn-sm btn-outline-danger"
+                    title="Delete Employee">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                  <button (click)="detailsOfEmployee(employee.id)" class="btn btn-sm btn-outline-success"
+                    title="View Details">
+                    <i class="bi bi-eye"></i>
+                  </button>
+                </div>
+
+                <!-- Upload resume (select + upload) -->
+                <div class="d-flex align-items-center gap-2 w-100">
+                  <input type="file" class="form-control form-control-sm" style="height:34px; padding:3px;"
+                         (change)="onResumeSelected($event, employee.id)" />
+                  <button class="btn btn-sm btn-primary" (click)="uploadResume(employee.id)">
+                    <i class="bi bi-cloud-upload"></i>
+                  </button>
+                </div>
+
+                <!-- Re-score button (uses top Job ID) -->
+                <div class="w-100">
+                  <button class="btn btn-sm btn-outline-success w-100" (click)="reScore(employee)">
+                    <i class="bi bi-percent"></i> Re-score
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- No Records Message -->
+          <tr *ngIf="employees.length === 0">
+            <td colspan="9" class="text-center text-muted py-4">
+              <i class="bi bi-database-slash"></i> No Employee Records Found
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card-footer text-end small text-muted py-2 px-3 bg-light">
+      <i class="bi bi-info-circle"></i> Total Employees: {{ employees.length }}
+    </div>
+  </div>
+</div>

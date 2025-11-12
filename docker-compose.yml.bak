@@ -1,0 +1,46 @@
+version: "3.8"
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: emp-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: system
+      MYSQL_DATABASE: alok
+      MYSQL_USER: root
+      MYSQL_PASSWORD: system
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/docker/mysql-init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+
+  emp-backend:
+    build:
+      context: ./backend
+    container_name: emp-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/alok?useSSL=false&serverTimezone=Asia/Kolkata
+      - DB_USER=root
+      - DB_PASSWORD=system
+    depends_on:
+      - mysql
+    volumes:
+      - ./backend/logs:/app/logs
+    restart: unless-stopped
+
+  emp-frontend:
+    build:
+      context: ./frontend
+    container_name: emp-frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - emp-backend
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

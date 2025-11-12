@@ -1,0 +1,79 @@
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+
+/* 🌈 Background Gradient */
+.bg-gradient {
+  background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ✨ Glass Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* 📸 Floating Image Animation */
+.floating-img {
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ✏️ Input Styles */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-weight: 500;
+}
+
+.form-control:focus {
+  border: 2px solid #0d6efd;
+  outline: none;
+  box-shadow: 0 0 10px rgba(13, 110, 253, 0.4);
+}
+
+/* 🎯 Button */
+.btn-primary {
+  background: linear-gradient(90deg, #007bff, #6610f2);
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #6610f2, #007bff);
+  transform: scale(1.05);
+}
+
+/* 🧠 Responsive Fix */
+@media (max-width: 768px) {
+  .glass-card {
+    margin-top: 30px;
+  }
+}

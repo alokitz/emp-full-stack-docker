@@ -1,0 +1,110 @@
+<section class="vh-100 d-flex align-items-center justify-content-center bg-gradient">
+  <div class="container py-5">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5">
+        <div class="card glass-card shadow-lg border-0">
+          <div class="card-body px-5 py-4">
+            <h4 class="text-center text-primary fw-bold mb-4">
+              <i class="bi bi-person-lock me-2"></i>Login
+            </h4>
+
+            <!-- show global error -->
+            <div *ngIf="errorMsg" class="alert alert-danger text-center">
+              {{ errorMsg }}
+            </div>
+
+            <!-- Login Form -->
+            <form *ngIf="!showOtp" (ngSubmit)="onLogin()" #loginForm="ngForm" novalidate>
+
+              <!-- Admin Name -->
+              <div class="form-floating mb-4 position-relative">
+                <input type="text" id="adminName" class="form-control rounded-3 shadow-sm"
+                  placeholder="Admin Name" [(ngModel)]="adminName" name="adminName" required autocomplete="username" />
+                <label for="adminName"><i class="bi bi-person-fill text-primary me-2"></i> User Name</label>
+              </div>
+
+              <!-- Password -->
+              <div class="form-floating mb-4 position-relative">
+                <input type="password" id="adminPassword" class="form-control rounded-3 shadow-sm"
+                  placeholder="Password" [(ngModel)]="adminPassword" name="adminPassword" required autocomplete="current-password" />
+                <label for="adminPassword"><i class="bi bi-lock-fill text-primary me-2"></i> Password</label>
+              </div>
+
+              <!-- Remember + Forgot -->
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="rememberMe" [(ngModel)]="remember" name="remember" />
+                  <label class="form-check-label text-dark" for="rememberMe">Remember Me</label>
+                </div>
+                <a routerLink="/forgot-password" class="text-decoration-none text-primary fw-semibold">
+                  Forgot Password?
+                </a>
+              </div>
+
+              <!-- Login Button -->
+              <div class="text-center">
+                <button type="submit"
+                  class="btn btn-primary btn-lg rounded-pill shadow-lg px-5 py-2"
+                  [disabled]="loading || !loginForm.form.valid">
+                  <i *ngIf="!loading" class="bi bi-box-arrow-in-right me-2"></i>
+                  <span *ngIf="!loading">Login</span>
+                  <span *ngIf="loading">
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Signing in...
+                  </span>
+                </button>
+              </div>
+
+              <!-- Register -->
+              <div class="text-center mt-4">
+                <p class="text-dark small">
+                  Don’t have an account?
+                  <a routerLink="/register" class="text-primary fw-bold">Register</a>
+                </p>
+              </div>
+
+            </form>
+
+            <!-- OTP Form (shown when 2FA required) -->
+            <form *ngIf="showOtp" (ngSubmit)="onVerifyOtp()" #otpForm="ngForm" novalidate>
+              <p class="text-center text-dark mb-3">
+                Enter 6-digit code from your authenticator app
+              </p>
+
+              <div class="mb-3">
+                <input
+                  type="text"
+                  id="otp"
+                  class="form-control rounded-3 shadow-sm text-center fs-4"
+                  placeholder="xxxxxx"
+                  maxlength="6"
+                  inputmode="numeric"
+                  autocomplete="one-time-code"
+                  [(ngModel)]="otp"
+                  name="otp"
+                  required
+                  pattern="[0-9]{6}" />
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <button type="button" class="btn btn-link text-decoration-none" (click)="cancelOtp()">Back</button>
+                <button type="submit"
+                  class="btn btn-success btn-lg rounded-pill shadow-lg px-4"
+                  [disabled]="loading || !isValidOtp()">
+                  <i *ngIf="!loading" class="bi bi-check2-circle me-2"></i>
+                  <span *ngIf="!loading">Verify</span>
+                  <span *ngIf="loading">
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Verifying...
+                  </span>
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

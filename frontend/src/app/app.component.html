@@ -1,0 +1,106 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
+  <div class="container-fluid px-4">
+
+    <!-- 🌟 Brand -->
+    <a class="navbar-brand fw-bold text-warning" routerLink="/">
+      <i class="bi bi-cpu me-2"></i> ALOK-IT ERP
+    </a>
+
+    <!-- ☰ Mobile Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- ✅ Navbar Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <!-- Left Menus -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a routerLink="/home" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-house-door-fill me-1"></i> Home
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="authService.isLoggedIn()">
+          <a routerLink="/show-all-employees" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-people-fill me-1"></i> Employee Master
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="authService.isLoggedIn()">
+          <a routerLink="/add-employee" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-person-plus-fill me-1"></i> Add Employee
+          </a>
+        </li>
+      </ul>
+
+      <!-- ✅ Right Section (Profile Dropdown) -->
+      <ul class="navbar-nav ms-auto align-items-center">
+
+        <!-- 🟢 Login (when not logged in) -->
+        <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+          <a routerLink="/login" class="btn btn-outline-warning btn-sm px-3">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Login here
+          </a>
+        </li>
+
+        <!-- 👤 Profile Dropdown (When Logged In) -->
+        <li class="nav-item dropdown" *ngIf="authService.isLoggedIn()">
+          <a class="nav-link dropdown-toggle text-warning d-flex align-items-center" href="#"
+             id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="assets/login.jpg"
+                 alt="Profile" width="32" height="32"
+                 class="rounded-circle border border-warning me-2">
+            <span>{{ authService.getUsername() || 'Admin' }}</span>
+          </a>
+
+          <!-- Dropdown Menu -->
+          <ul class="dropdown-menu dropdown-menu-end bg-dark border-secondary shadow-lg" aria-labelledby="profileDropdown">
+            
+            <li class="dropdown-header text-light fw-semibold">
+              <i class="bi bi-person-badge me-2 text-warning"></i>
+              {{ authService.getRole() || 'Admin' }}
+            </li>
+            <li><hr class="dropdown-divider border-secondary"></li>
+
+            <li>
+              <a class="dropdown-item text-light" routerLink="/profile">
+                <i class="bi bi-person-lines-fill me-2 text-primary"></i> View Profile
+              </a>
+            </li>
+            
+            <li>
+              <a class="dropdown-item text-light" routerLink="/settings">
+                <i class="bi bi-gear me-2 text-info"></i> Settings
+              </a>
+            </li>
+
+            <li><hr class="dropdown-divider border-secondary"></li>
+
+            <!-- 🔴 Logout -->
+            <li>
+              <button class="dropdown-item text-danger fw-bold" (click)="onLogout()">
+                <i class="bi bi-box-arrow-right me-2"></i> Logout
+              </button>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- 🔹 Main content -->
+<div class="container" style="margin-top: 85px;">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- 🔹 Footer -->
+<footer class="footer bg-dark text-center text-light py-3 mt-4 border-top border-secondary">
+  <div class="container">
+    <small>© {{2025}} <span class="text-warning fw-bold">Alok IT System</span> | All Rights Reserved</small>
+  </div>
+</footer>

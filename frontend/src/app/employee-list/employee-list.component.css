@@ -1,0 +1,158 @@
+.btn{
+    margin-right: 20px;
+    box-shadow: 10 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.inline{
+    display: flex;
+}
+
+
+.inline .btn{
+    margin-left: 1rem;
+}
+
+input{
+    border: 1px solid #000000;
+    box-shadow: 10 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ERP Style Table Design */
+.erp-table {
+  font-size: 0.95rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.erp-table thead {
+  background-color: #2c3e50;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.erp-table tbody tr {
+  transition: all 0.2s ease-in-out;
+}
+
+.erp-table tbody tr:hover {
+  background-color: #f0f8ff;
+  transform: scale(1.01);
+}
+
+.search-box {
+  border: 1px solid #ccc;
+  transition: 0.3s;
+}
+
+.search-box:focus {
+  box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.4);
+  border-color: #007bff;
+}
+
+.badge {
+  font-size: 0.85rem;
+  border-radius: 10px;
+  background: linear-gradient(to right, #a2c2e6, #dfefff);
+}
+
+.btn-outline-secondary:hover {
+  background-color: #495057;
+  color: #fff;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-outline-success:hover {
+  background-color: #198754;
+  color: #fff;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.card-footer {
+  border-top: 1px solid #e0e0e0;
+}
+
+/* ERP Table Base */
+.erp-table {
+  font-size: 0.95rem;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+/* Header */
+.erp-table thead {
+  background: linear-gradient(90deg, #212529, #343a40);
+  color: #fff;
+}
+
+/* Hover */
+.erp-table tbody tr {
+  transition: all 0.2s ease-in-out;
+}
+.erp-table tbody tr:hover {
+  background-color: #f5f9ff;
+  transform: scale(1.005);
+}
+
+/* Search Box */
+.search-box {
+  border: 1px solid #ccc;
+  transition: 0.3s;
+}
+.search-box:focus {
+  box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.4);
+  border-color: #007bff;
+}
+
+/* Action Buttons */
+.action-btn {
+  min-width: 70px;
+  margin: 0 3px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  transition: 0.2s ease-in-out;
+}
+
+.action-btn i {
+  margin-right: 3px;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-outline-success:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Card Footer */
+.card-footer {
+  border-top: 1px solid #e0e0e0;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Badge Style */
+.badge {
+  font-size: 0.85rem;
+  border-radius: 10px;
+  background: linear-gradient(to right, #a2c2e6, #e3f2fd);
+}
