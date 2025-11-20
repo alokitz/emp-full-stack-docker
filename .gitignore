@@ -1,0 +1,30 @@
+# Logs
+/backend/emp_backend_2fa/logs/
+**/logs/
+*.log
+*.log.*
+*.gz
+
+# Node / Angular
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Misc
+docker-compose
+emp-full-stack-docker/
