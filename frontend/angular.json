@@ -32,7 +32,7 @@
               "node_modules/bootstrap-icons/font/bootstrap-icons.css"
             ],
             "scripts": [
-               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
@@ -98,11 +98,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "18528528-b1af-4edb-9651-5c3b345b7b90"
+    "analytics": "18528528-b1af-4edb-9651-5c3b345b7b90",
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }

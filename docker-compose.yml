@@ -10,7 +10,7 @@ services:
       - mysql_data:/var/lib/mysql
       - ./backend/emp_backend_2fa/docker/mysql-init:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
   emp-backend:
     build:
@@ -20,10 +20,11 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/alok?useSSL=false&serverTimezone=Asia/Kolkata
-      - DB_USER=root
-      - DB_PASSWORD=system
+      SPRING_PROFILES_ACTIVE: "prod"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/alok?useSSL=true&serverTimezone=Asia/Kolkata"
+      DB_USER: "root"
+      DB_PASSWORD: "system"
+      OPENAI_API_KEY: "${OPENAI_API_KEY}"
     depends_on:
       - mysql
     volumes:
